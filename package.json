@@ -1,0 +1,22 @@
+{
+  "name": "currency-convertor-cli",
+  "version": "1.0.0",
+  "description": "It's a currency convertor thing that works in your console.",
+  "license": "ISC",
+  "author": "Vorondanil54",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/readline-sync": "^1.4.8",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0"
+  }
+}
