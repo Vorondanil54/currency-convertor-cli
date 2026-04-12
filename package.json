@@ -7,9 +7,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "cccli": "index.js"
+  },
   "dependencies": {
+    "@inquirer/prompts": "^8.4.1",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
