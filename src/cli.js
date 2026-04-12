@@ -31,6 +31,7 @@ const cli = async () => {
 
   if (currencyIn == currencyOut) {
     console.log('Error!! You cannot convert the same currency')
+    console.log('Please restart the program.')
     return null
   }
 
