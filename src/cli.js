@@ -1,5 +1,7 @@
 import { select } from '@inquirer/prompts'
 
+import curr from '../currency/currency.json' with { type: 'json' }
+
 const cli = async () => {
   console.log('Welcome to Currency Convertor CLI')
 
