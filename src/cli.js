@@ -1,4 +1,4 @@
-import { select } from '@inquirer/prompts'
+import { select, input } from '@inquirer/prompts'
 
 import curr from '../currency/currency.json' with { type: 'json' }
 
@@ -40,6 +40,7 @@ const cli = async () => {
   console.log('')
 
   console.log(`You have selected to convert ${currencyIn} into ${currencyOut}`)
+  const currencyAmount = await input({ message: `Now please enter how much ${currencyIn} you want to convert into ${currencyOut}` })
 }
 
 export default cli
