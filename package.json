@@ -14,14 +14,12 @@
     "cccli": "index.js"
   },
   "dependencies": {
-    "@inquirer/prompts": "^8.4.1",
-    "readline-sync": "^1.4.10"
+    "@inquirer/prompts": "^8.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@types/readline-sync": "^1.4.8",
     "eslint": "^10.2.0",
-    "globals": "^17.4.0"
+    "globals": "^17.5.0"
   }
 }
