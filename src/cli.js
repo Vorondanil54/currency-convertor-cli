@@ -1,6 +1,7 @@
 import { select, input } from '@inquirer/prompts'
 
 import curr from '../currency/currency.json' with { type: 'json' }
+import names from '../currency/names.json' with { type: 'json' }
 
 const cli = async () => {
   console.log('Welcome to Currency Convertor CLI')
@@ -39,11 +40,11 @@ const cli = async () => {
 
   console.log('')
 
-  console.log(`You have selected to convert ${currencyIn} into ${currencyOut} (${currencyIn} -> ${currencyOut})`)
+  console.log(`You have selected to convert ${names[currencyIn]} into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})`)
 
   console.log('')
 
-  const currencyAmount = await input({ message: `Now please enter how much ${currencyIn} you want to convert into ${currencyOut} (${currencyIn} -> ${currencyOut})` })
+  const currencyAmount = await input({ message: `Now please enter how much ${names[currencyIn]} you want to convert into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})` })
   const currencyAmountFormatted = currencyAmount.replace(/\D/g, '')
   console.log(`Converting ${currencyAmountFormatted} ${currencyIn}...`)
 }
