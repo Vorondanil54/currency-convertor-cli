@@ -46,7 +46,15 @@ const cli = async () => {
 
   const currencyAmount = await input({ message: `Now please enter how much ${names[currencyIn]} you want to convert into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})` })
   const currencyAmountFormatted = currencyAmount.replace(/\D/g, '')
-  console.log(`Converting ${currencyAmountFormatted} ${currencyIn}...`)
+  console.log(`Converting ${currencyAmountFormatted} ${currencyIn} into ${currencyOut}...`)
+
+  const currencyFinal = currencyAmountFormatted * curr[currencyIn][currencyOut]
+  if (!Number.isInteger(currencyFinal)) {
+    console.log(`${Number(currencyFinal.toString())} ${currencyOut}`)
+    return Number(currencyFinal.toString())
+  }
+  console.log(`${currencyFinal} ${currencyOut}`)
+  return currencyFinal
 }
 
 export default cli
