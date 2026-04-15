@@ -1,6 +1,13 @@
 {
   "USD": "US Dollar ($)",
   "EUR": "Euro (€)",
+  "GBP": "British Pound (£)",
+  "JPY": "Japanese Yen (¥)",
+  "CNY": "Chinese Yuan (¥)",
   "RUB": "Russian Ruble (₽)",
+  "CHF": "Swiss Franc (₣)",
+  "TRY": "Turkish Lira (₺)",
+  "INR": "Indian Rupee (₹)",
+  "KRW": "South Korean Won (₩)",
   "KZT": "Kazakhstani Tenge (₸)"
 }

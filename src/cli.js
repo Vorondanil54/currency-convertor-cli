@@ -13,7 +13,14 @@ const cli = async () => {
     choices: [
       { name: 'US Dollar ($)', value: 'USD' },
       { name: 'Euro (€)', value: 'EUR' },
+      { name: 'British Pound (£)', value: 'GBP' },
+      { name: 'Japanese Yen (¥)', value: 'JPY' },
+      { name: 'Chinese Yuan (¥)', value: 'CNY' },
       { name: 'Russian Ruble (₽)', value: 'RUB' },
+      { name: 'Swiss Franc (₣)', value: 'CHF' },
+      { name: 'Turkish Lira (₺)', value: 'TRY' },
+      { name: 'Indian Rupee (₹)', value: 'INR' },
+      { name: 'South Korean Won (₩)', value: 'KRW' },
       { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
     ],
   })
@@ -27,7 +34,14 @@ const cli = async () => {
     choices: [
       { name: 'US Dollar ($)', value: 'USD' },
       { name: 'Euro (€)', value: 'EUR' },
+      { name: 'British Pound (£)', value: 'GBP' },
+      { name: 'Japanese Yen (¥)', value: 'JPY' },
+      { name: 'Chinese Yuan (¥)', value: 'CNY' },
       { name: 'Russian Ruble (₽)', value: 'RUB' },
+      { name: 'Swiss Franc (₣)', value: 'CHF' },
+      { name: 'Turkish Lira (₺)', value: 'TRY' },
+      { name: 'Indian Rupee (₹)', value: 'INR' },
+      { name: 'South Korean Won (₩)', value: 'KRW' },
       { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
     ],
   })
