@@ -1,5 +1,6 @@
 {
-  "USD": "USA Dollar ($)",
+  "USD": "US Dollar ($)",
+  "EUR": "Euro (€)",
   "RUB": "Russian Ruble (₽)",
   "KZT": "Kazakhstani Tenge (₸)"
 }

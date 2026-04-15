@@ -11,8 +11,9 @@ const cli = async () => {
   const currencyIn = await select({
     message: 'Please select the |IN| currency you want to convert from',
     choices: [
+      { name: 'US Dollar ($)', value: 'USD' },
+      { name: 'Euro (€)', value: 'EUR' },
       { name: 'Russian Ruble (₽)', value: 'RUB' },
-      { name: 'USA Dollar ($)', value: 'USD' },
       { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
     ],
   })
@@ -24,8 +25,9 @@ const cli = async () => {
   const currencyOut = await select({
     message: 'Now please select the |OUT| currency you want to convert into',
     choices: [
+      { name: 'US Dollar ($)', value: 'USD' },
+      { name: 'Euro (€)', value: 'EUR' },
       { name: 'Russian Ruble (₽)', value: 'RUB' },
-      { name: 'USA Dollar ($)', value: 'USD' },
       { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
     ],
   })
