@@ -6,23 +6,16 @@ import names from '../currency/names.json' with { type: 'json' }
 const cli = async () => {
   console.log('Welcome to Currency Convertor CLI')
 
+  const currencyList = []
+  for (const [curCode, curName] of Object.entries(names)) {
+    currencyList.push({ name: curName, value: curCode })
+  }
+
   console.log('')
 
   const currencyIn = await select({
     message: 'Please select the |IN| currency you want to convert from',
-    choices: [
-      { name: 'US Dollar ($)', value: 'USD' },
-      { name: 'Euro (€)', value: 'EUR' },
-      { name: 'British Pound (£)', value: 'GBP' },
-      { name: 'Japanese Yen (¥)', value: 'JPY' },
-      { name: 'Chinese Yuan (¥)', value: 'CNY' },
-      { name: 'Russian Ruble (₽)', value: 'RUB' },
-      { name: 'Swiss Franc (₣)', value: 'CHF' },
-      { name: 'Turkish Lira (₺)', value: 'TRY' },
-      { name: 'Indian Rupee (₹)', value: 'INR' },
-      { name: 'South Korean Won (₩)', value: 'KRW' },
-      { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
-    ],
+    choices: currencyList,
   })
 
   console.log(`Selected: ${currencyIn}`)
@@ -31,19 +24,7 @@ const cli = async () => {
 
   const currencyOut = await select({
     message: 'Now please select the |OUT| currency you want to convert into',
-    choices: [
-      { name: 'US Dollar ($)', value: 'USD' },
-      { name: 'Euro (€)', value: 'EUR' },
-      { name: 'British Pound (£)', value: 'GBP' },
-      { name: 'Japanese Yen (¥)', value: 'JPY' },
-      { name: 'Chinese Yuan (¥)', value: 'CNY' },
-      { name: 'Russian Ruble (₽)', value: 'RUB' },
-      { name: 'Swiss Franc (₣)', value: 'CHF' },
-      { name: 'Turkish Lira (₺)', value: 'TRY' },
-      { name: 'Indian Rupee (₹)', value: 'INR' },
-      { name: 'South Korean Won (₩)', value: 'KRW' },
-      { name: 'Kazakhstani Tenge (₸)', value: 'KZT' },
-    ],
+    choices: currencyList,
   })
 
   console.log(`Selected: ${currencyOut}`)
@@ -65,12 +46,8 @@ const cli = async () => {
   console.log(`Converting ${currencyAmountFormatted} ${currencyIn} into ${currencyOut}...`)
 
   const currencyFinal = currencyAmountFormatted * curr[currencyIn][currencyOut]
-  if (!Number.isInteger(currencyFinal)) {
-    console.log(`${Number(currencyFinal.toString())} ${currencyOut}`)
-    return Number(currencyFinal.toString())
-  }
-  console.log(`${currencyFinal} ${currencyOut}`)
-  return currencyFinal
+  console.log(`${parseFloat(currencyFinal.toFixed(10))} ${currencyOut}`)
+  return parseFloat(currencyFinal.toFixed(10))
 }
 
 export default cli
