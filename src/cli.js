@@ -22,18 +22,14 @@ const cli = async () => {
 
   console.log('')
 
+  const currencyListUpdated = currencyList.filter(cur => cur.value !== currencyIn)
+
   const currencyOut = await select({
     message: 'Now please select the |OUT| currency you want to convert into',
-    choices: currencyList,
+    choices: currencyListUpdated,
   })
 
   console.log(`Selected: ${currencyOut}`)
-
-  if (currencyIn == currencyOut) {
-    console.log('Error!! You cannot convert the same currency')
-    console.log('Please restart the program.')
-    return null
-  }
 
   console.log('')
 
