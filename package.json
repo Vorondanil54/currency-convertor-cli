@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "cccli": "index.js"
+    "cccli": "./index.js"
   },
   "dependencies": {
     "@inquirer/prompts": "^8.4.3",
