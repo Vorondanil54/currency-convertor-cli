@@ -1,6 +1,8 @@
-import { select, input } from '@inquirer/prompts'
+import { select, input, confirm } from '@inquirer/prompts'
+import fs from 'fs/promises'
 
-import curr from '../currency/currency.json' with { type: 'json' }
+import curSync from '../src/curSync.js'
+
 import names from '../currency/names.json' with { type: 'json' }
 
 const cli = async () => {
@@ -10,6 +12,14 @@ const cli = async () => {
   for (const [curCode, curName] of Object.entries(names)) {
     currencyList.push({ name: curName, value: curCode })
   }
+
+  console.log('')
+
+  const curSyncConfirmCheck = await confirm({ message: 'Do you want to sync currency rates? (Otherwise will use local)', default: false })
+  if (curSyncConfirmCheck == true) {
+    await curSync()
+  }
+  const curr = JSON.parse(await fs.readFile('./currency/currency.json', 'utf-8')) // import curr from '../currency/currency.json' with { type: 'json' }; using 'fs' file read command with JSON parse following to prevent using old cache if syncing rates
 
   console.log('')
 
