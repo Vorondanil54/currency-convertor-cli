@@ -55,7 +55,7 @@ const curSync = async () => {
 
   // console.log(curRatesList)
 
-  fs.writeFile('./currency/currency.json', JSON.stringify(curRatesList, null, 4)) // Step 4: Write final list of currency rates into currency.json file
+  await fs.writeFile('./currency/currency.json', JSON.stringify(curRatesList, null, 4)) // Step 4: Write final list of currency rates into currency.json file
 }
 
 export default curSync
