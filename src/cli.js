@@ -1,25 +1,29 @@
 import { select, input, confirm } from '@inquirer/prompts'
 import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 import curSync from '../src/curSync.js'
 
 import names from '../currency/names.json' with { type: 'json' }
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 const cli = async () => {
-  console.log('Welcome to Currency Convertor CLI')
+  console.log('Welcome to Currency Convertor CLI\n')
 
   const currencyList = []
   for (const [curCode, curName] of Object.entries(names)) {
     currencyList.push({ name: curName, value: curCode })
   }
 
-  console.log('')
-
   const curSyncConfirmCheck = await confirm({ message: 'Do you want to sync currency rates? (Otherwise will use local)', default: false })
   if (curSyncConfirmCheck == true) {
     await curSync()
   }
-  const curr = JSON.parse(await fs.readFile('./currency/currency.json', 'utf-8')) // import curr from '../currency/currency.json' with { type: 'json' }; using 'fs' file read command with JSON parse following to prevent using old cache if syncing rates
+  const currPath = path.join(__dirname, '../currency/currency.json')
+  const curr = JSON.parse(await fs.readFile(currPath, 'utf-8')) // import curr from '../currency/currency.json' with { type: 'json' }; using 'fs' file read command with JSON parse following to prevent using old cache if syncing rates
 
   console.log('')
 
@@ -28,9 +32,7 @@ const cli = async () => {
     choices: currencyList,
   })
 
-  console.log(`Selected: ${currencyIn}`)
-
-  console.log('')
+  console.log(`Selected: ${currencyIn}\n`)
 
   const currencyListUpdated = currencyList.filter(cur => cur.value !== currencyIn)
 
@@ -39,13 +41,9 @@ const cli = async () => {
     choices: currencyListUpdated,
   })
 
-  console.log(`Selected: ${currencyOut}`)
+  console.log(`Selected: ${currencyOut}\n`)
 
-  console.log('')
-
-  console.log(`You have selected to convert ${names[currencyIn]} into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})`)
-
-  console.log('')
+  console.log(`You have selected to convert ${names[currencyIn]} into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})\n`)
 
   const currencyAmount = await input({ message: `Now please enter how much ${names[currencyIn]} you want to convert into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})` })
   const currencyAmountFormatted = currencyAmount.replace(/\D/g, '')
