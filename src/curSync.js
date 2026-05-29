@@ -17,6 +17,8 @@ let apiCurIn = 'base='
 let apiCurOut = 'currencies='
 const separator = '&'
 
+let syncErrorOccurred = false
+
 const curSync = async () => {
   const curRatesList = {}
 
@@ -32,7 +34,7 @@ const curSync = async () => {
 
   if (!process.env.API_KEY || process.env.API_KEY === 'YOUR_API_KEY_HERE') {
     console.log('\nAttention! FXRatesAPI key is required for synchronization')
-
+    console.log('Please navigate to https://fxratesapi.com, create your account and copy your API token from there')
     const userApiKey = await input({
       message: 'Please enter your API key:',
       validate: value => value.trim().length > 0 ? true : 'Key cannot be empty!',
@@ -59,7 +61,7 @@ const curSync = async () => {
     apiUrl += `${apiCurIn}${apiCurOut}${apiKey}`
     // console.log(apiUrl)
 
-    curRatesList[cur] = {} // Step 1.5: Create object in curRatesList variable with |IN| currency key
+    curRatesList[cur] = {} // Step 1.5: Create object in curRatesList variable with |IN| currency key ( { "USD": {} } )
 
     async function getCurrencyRates() { // Step 2: Contacting FXRatesAPI server for currency rates
       try {
@@ -77,13 +79,14 @@ const curSync = async () => {
             continue
           }
           // console.log(`${curSub} ${data.rates[curSub]}`)
-          curRatesList[cur][curSub] = data.rates[curSub] // Step 2.5: Create object in curRatesList variable with |OUT| currency key
+          curRatesList[cur][curSub] = data.rates[curSub] // Step 2.5: Create object in curRatesList variable with |OUT| currency key inserted into current |IN| ( { "USD": { "RUB": 1.234 } } )
         }
 
         // console.log('')
       }
       catch (error) {
-        console.log(`Error during syncing: ${error.message}`)
+        syncErrorOccurred = true
+        console.log(`${cur}: Error during syncing: ${error.message}`)
       }
     }
     await getCurrencyRates()
@@ -95,9 +98,14 @@ const curSync = async () => {
 
   // console.log(curRatesList)
 
-  const currPath = path.join(__dirname, '../currency/currency.json')
-  await fs.writeFile(currPath, JSON.stringify(curRatesList, null, 4)) // Step 4: Write final list of currency rates into currency.json file
-  console.log('Rates synced successfully, resuming...')
+  if (syncErrorOccurred === true) {
+    console.log('There was errors while syncing, aborting...') // If error caught in getCurrencyRates() function exiting without overwriting currency rates file
+  }
+  else {
+    const currPath = path.join(__dirname, '../currency/currency.json')
+    await fs.writeFile(currPath, JSON.stringify(curRatesList, null, 4)) // ...else Step 4: Write final list of currency rates into currency.json file
+    console.log('Rates synced successfully, resuming...')
+  }
 }
 
 export default curSync

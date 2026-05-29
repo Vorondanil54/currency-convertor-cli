@@ -2,7 +2,7 @@
 
 This is a program working in your console that converts currency. That's it, feel free to use (✿◠‿◠)
 
-This program uses *api.fxratesapi.com* for currencies synchronization and you'll probably need an API key
+This program uses *api.fxratesapi.com* for currencies synchronization and you'll probably need an API key (go to https://fxratesapi.com)
 
 (this program CAN work offline, but I recommend you make sure to sync rates at the start of program)
 
