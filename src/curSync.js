@@ -48,7 +48,22 @@ const curSync = async () => {
 
   const apiKey = process.env.API_KEY
 
-  for (const cur of Object.keys(names)) { // Step 1: Forming an URL for further conversion until there will be no currency codes left to check
+  const spinnerFrames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+  let frameIndex = 0
+  let currentCurrencyText = ''
+  let currentCurrencyNumber = 1
+
+  const currencyKeys = Object.keys(names)
+
+  const spinnerInterval = setInterval(() => {
+    const frame = spinnerFrames[frameIndex]
+    process.stdout.write(`\r${frame} Syncing ${currentCurrencyText} (${currentCurrencyNumber}/${currencyKeys.length} done) \x1b[K`)
+    frameIndex = (frameIndex + 1) % spinnerFrames.length
+  }, 80)
+
+  for (const cur of currencyKeys) { // Step 1: Forming an URL for further conversion until there will be no currency codes left to check
+    currentCurrencyText = cur
+
     apiCurIn += `${cur}${separator}`
     for (const curSub of Object.keys(names)) {
       if (curSub === cur) {
@@ -81,11 +96,13 @@ const curSync = async () => {
           // console.log(`${curSub} ${data.rates[curSub]}`)
           curRatesList[cur][curSub] = data.rates[curSub] // Step 2.5: Create object in curRatesList variable with |OUT| currency key inserted into current |IN| ( { "USD": { "RUB": 1.234 } } )
         }
+        currentCurrencyNumber += 1
 
         // console.log('')
       }
       catch (error) {
         syncErrorOccurred = true
+        process.stdout.write('\r\x1b[K')
         console.log(`${cur}: Error during syncing: ${error.message}`)
       }
     }
@@ -96,6 +113,8 @@ const curSync = async () => {
     apiCurOut = 'currencies='
   }
 
+  clearInterval(spinnerInterval)
+  process.stdout.write('\r\x1b[K')
   // console.log(curRatesList)
 
   if (syncErrorOccurred === true) {
