@@ -50,8 +50,8 @@ const cli = async () => {
   console.log(`Converting ${currencyAmountFormatted} ${currencyIn} into ${currencyOut}...`)
 
   const currencyFinal = currencyAmountFormatted * curr[currencyIn][currencyOut]
-  console.log(`${parseFloat(currencyFinal.toFixed(10))} ${currencyOut}`)
-  return parseFloat(currencyFinal.toFixed(10))
+  console.log(`${Number(currencyFinal.toFixed(4))} ${currencyOut}`)
+  return Number(currencyFinal.toFixed(4))
 }
 
 export default cli

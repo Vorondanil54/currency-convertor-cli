@@ -40,7 +40,7 @@ const curSync = async () => {
       validate: value => value.trim().length > 0 ? true : 'Key cannot be empty!',
     })
 
-    await fs.writeFile(envPath, `API_KEY=${userApiKey.trim()}\n`, 'utf8')
+    await fs.writeFile(envPath, `api_key=${userApiKey.trim()}\n`, 'utf8')
 
     process.env.API_KEY = userApiKey.trim()
     console.log('API key saved\n')
