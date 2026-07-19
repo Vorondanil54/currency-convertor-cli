@@ -18,7 +18,10 @@ const cli = async () => {
     currencyList.push({ name: curName, value: curCode })
   }
 
-  const curSyncConfirmCheck = await confirm({ message: 'Do you want to sync currency rates? (Otherwise will use local)', default: false })
+  const curSyncConfirmCheck = await confirm({
+    message: 'Do you want to sync currency rates? (Otherwise will use local)',
+    default: false,
+  })
   if (curSyncConfirmCheck == true) {
     await curSync()
   }
@@ -45,7 +48,9 @@ const cli = async () => {
 
   console.log(`You have selected to convert ${names[currencyIn]} into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})\n`)
 
-  const currencyAmount = await input({ message: `Now please enter how much ${names[currencyIn]} you want to convert into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})` })
+  const currencyAmount = await input({
+    message: `Now please enter how much ${names[currencyIn]} you want to convert into ${names[currencyOut]} (${currencyIn} -> ${currencyOut})`,
+  })
   const currencyAmountFormatted = currencyAmount.replace(/\D/g, '')
   console.log(`Converting ${currencyAmountFormatted} ${currencyIn} into ${currencyOut}...`)
 
