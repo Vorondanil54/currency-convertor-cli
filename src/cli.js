@@ -2,6 +2,7 @@ import { select, input, confirm } from '@inquirer/prompts'
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { styleText } from 'node:util'
 
 import curSync from '../src/curSync.js'
 
@@ -55,7 +56,7 @@ const cli = async () => {
   console.log(`Converting ${currencyAmountFormatted} ${currencyIn} into ${currencyOut}...`)
 
   const currencyFinal = currencyAmountFormatted * curr[currencyIn][currencyOut]
-  console.log(`${Number(currencyFinal.toFixed(4))} ${currencyOut}`)
+  console.log(styleText('bold', `${Number(currencyFinal.toFixed(4))} ${currencyOut}`))
   return Number(currencyFinal.toFixed(4))
 }
 

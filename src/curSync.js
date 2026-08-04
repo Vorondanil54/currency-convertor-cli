@@ -4,6 +4,7 @@ import { existsSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
+import { styleText } from 'node:util'
 
 import names from '../currency/names.json' with { type: 'json' }
 
@@ -33,7 +34,7 @@ const curSync = async () => {
   })
 
   if (!process.env.API_KEY || process.env.API_KEY === 'YOUR_API_KEY_HERE') {
-    console.log('\nAttention! FXRatesAPI key is required for synchronization')
+    console.log(styleText(['yellow', 'bold'], '\nAttention! FXRatesAPI key is required for synchronization'))
     console.log('Please navigate to https://fxratesapi.com, create your account and copy your API token from there')
     const userApiKey = await input({
       message: 'Please enter your API key:',
